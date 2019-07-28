@@ -15,16 +15,16 @@ public class FileUtility {
 	
 	public static boolean filePresentAtRoot(String fileName) {
 		String projectRoot = System.getProperty("user.dir");
-		System.out.println(projectRoot);
+		//System.out.println(projectRoot);
 		projectRoot = projectRoot.substring(0, projectRoot.lastIndexOf("\\"));
-		System.out.println(projectRoot);
+		//System.out.println(projectRoot);
 		FileReader fr = null;
 		try {
 			fr = new FileReader(new File(projectRoot + "\\" + fileName));
 			fr.close();
 			
 		}catch(FileNotFoundException fnfe) {
-			//fnfe.printStackTrace();
+			fnfe.printStackTrace();
 			return false;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -34,12 +34,31 @@ public class FileUtility {
 		}
 		return true;
 	}
+	
+	public static String getPath(String fileName) {
+		String projectRoot = System.getProperty("user.dir");
+		System.out.println("Project Root   @ " + projectRoot);
+		String projectParentDirectory = projectRoot.substring(0, projectRoot.lastIndexOf("\\"));
+		System.out.println("Project Parent @ " + projectParentDirectory);
+		
+		String path;
+		
+		if(FileUtility.filePresentAtRoot(fileName))
+			path = (projectParentDirectory + "\\" + fileName);
+		else
+			path = (((Thread.currentThread().getContextClassLoader()).getResource(fileName)).toString()).substring(6);
+		
+		System.out.println("Location of " + fileName + "\t\t @ " + path);
+		
+		return path;
+	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stu
-		System.out.println(FileUtility.filePresentAtRoot("emailList.properties"));
+		System.out.println(FileUtility.getPath("chromedriver.exe"));
 	}
 
 }
