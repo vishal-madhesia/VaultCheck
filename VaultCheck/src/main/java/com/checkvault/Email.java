@@ -3,6 +3,7 @@
  */
 package com.checkvault;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.checkvault.utility.FileUtility;
+
 public class Email {
 	/**
 	 * @throws IOException 
@@ -32,7 +35,7 @@ public class Email {
 		try {
 
 			Properties SmtpProps = new Properties();
-			SmtpProps.load((Thread.currentThread().getContextClassLoader()).getResourceAsStream("smtpClient.properties"));			
+			SmtpProps.load(new FileInputStream(FileUtility.getPath("smtpClient.properties")));		
 			/*
 			 * props.put("mail.transport.protocol", "smtp");
 			 * props.put("mail.smtp.starttls.enable", "true"); props.put("mail.smtp.host",
@@ -47,7 +50,7 @@ public class Email {
 			transport.connect();
 
 			Properties EmailProps = new Properties();
-			EmailProps.load((Thread.currentThread().getContextClassLoader()).getResourceAsStream("emailList.properties"));
+			EmailProps.load(new FileInputStream(FileUtility.getPath("emailList.properties")));
 			
 			msg.setFrom(new InternetAddress(EmailProps.getProperty("mailFrom")));
 

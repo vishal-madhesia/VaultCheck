@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.checkvault.VaultCheck;
+import com.checkvault.utility.FileUtility;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,15 +24,13 @@ public class VaultCheckTest {
 	
 	@DataProvider(name = "data-provider")
     public String[] dataProviderMethod() {
-		return new String[] { "ATL20DS6MNOVT01:8200", "ATL20DS6MNOVT02:8200", "ATL20DS1MNOVT01:8200", "ATL20DS1MNOVT02:8200" };    }
+		return new String[] { "ATL20DS6MNOVT01:8200", "ATL20DS6MNOVT02:8200", "ATL20DS1MNOVT01:8200", "ATL20DS1MNOVT02:8200", "10.0.21.90:8200" };    }
 	
 	@BeforeClass
 	public void initWebDriver() {
 		
 		System.setProperty("webdriver.chrome.driver", 
-				(((Thread.currentThread().getContextClassLoader()).getResource("chromedriver.exe")).toString()).substring(6));
-		/*System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\vmadhe01\\eclipse-workspace\\Results\\src\\main\\resources\\chromedriver.exe" );*/
+				((FileUtility.getPath("chromedriver.exe")).toString()));
 		wd = new ChromeDriver();
 		wd.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
