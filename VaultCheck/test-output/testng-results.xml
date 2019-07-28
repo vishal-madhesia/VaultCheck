@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="37167" started-at="2019-07-26T09:53:37Z" finished-at="2019-07-26T09:54:14Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="37167" started-at="2019-07-26T09:53:37Z" finished-at="2019-07-26T09:54:14Z">
+      <class name="com.vaultCheck.test.VaultCheckTest">
+        <test-method status="PASS" signature="initWebDriver()[pri:0, instance:com.vaultCheck.test.VaultCheckTest@370736d9]" name="initWebDriver" is-config="true" duration-ms="10981" started-at="2019-07-26T09:53:37Z" finished-at="2019-07-26T09:53:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initWebDriver -->
+        <test-method status="PASS" signature="checkIndividualVaults(java.lang.String)[pri:0, instance:com.vaultCheck.test.VaultCheckTest@370736d9]" name="checkIndividualVaults" duration-ms="23965" started-at="2019-07-26T09:53:48Z" data-provider="data-provider" finished-at="2019-07-26T09:54:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[10.0.21.90:8200]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkIndividualVaults -->
+        <test-method status="PASS" signature="closeWebDriver()[pri:0, instance:com.vaultCheck.test.VaultCheckTest@370736d9]" name="closeWebDriver" is-config="true" duration-ms="2114" started-at="2019-07-26T09:54:12Z" finished-at="2019-07-26T09:54:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeWebDriver -->
+      </class> <!-- com.vaultCheck.test.VaultCheckTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
