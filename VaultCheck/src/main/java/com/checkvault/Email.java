@@ -36,12 +36,6 @@ public class Email {
 
 			Properties SmtpProps = new Properties();
 			SmtpProps.load(new FileInputStream(FileUtility.getPath("smtpClient.properties")));		
-			/*
-			 * props.put("mail.transport.protocol", "smtp");
-			 * props.put("mail.smtp.starttls.enable", "true"); props.put("mail.smtp.host",
-			 * "smtp.prgx.com"); props.put("mail.smtp.port", "25"); props.put("mail.debug",
-			 * "false");
-			 */
 			
 			Session session = Session.getInstance(SmtpProps);
 
@@ -53,8 +47,6 @@ public class Email {
 			EmailProps.load(new FileInputStream(FileUtility.getPath("emailList.properties")));
 			
 			msg.setFrom(new InternetAddress(EmailProps.getProperty("mailFrom")));
-
-			//System.out.println("MailFrom:" + mailFrom);
 
 			String sendTo = EmailProps.getProperty("sendTo");
 
