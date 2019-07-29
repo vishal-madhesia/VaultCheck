@@ -1,5 +1,9 @@
 package com.vaultCheck.test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -23,8 +27,26 @@ public class VaultCheckTest {
 	private WebDriver wd;
 	
 	@DataProvider(name = "data-provider")
-    public String[] dataProviderMethod() {
-		return new String[] { "ATL20DS6MNOVT01:8200", "ATL20DS6MNOVT02:8200", "ATL20DS1MNOVT01:8200", "ATL20DS1MNOVT02:8200", "10.0.21.90:8200" };    }
+    public String[] dataProviderMethod()  {
+		Properties prop = new Properties();
+		
+		try {
+			prop.load(new FileInputStream(FileUtility.getPath("VaultServerList.properties")));
+			String serverAddress[] = prop.getProperty("VaultServerList").split(",");
+			for(String s : serverAddress) {
+				s.trim();
+			return serverAddress;
+			}
+		}catch(FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		}catch(IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			
+		}
+		return null;
+		
+	}
 	
 	@BeforeClass
 	public void initWebDriver() {
