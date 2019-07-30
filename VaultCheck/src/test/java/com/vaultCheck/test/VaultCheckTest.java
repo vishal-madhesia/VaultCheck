@@ -60,14 +60,17 @@ public class VaultCheckTest {
 	@Test(dataProvider = "data-provider")
 	public void checkIndividualVaults(String s) {
 		try {
-			if(VaultCheck.showResult(this.wd,s)) {
+			if(VaultCheck.showResult(this.wd,s) > 0) {
 				System.out.println(s + " : Not Sealed");
 				Assert.assertTrue(true);
-			}
-			else {
+			}else if(VaultCheck.showResult(this.wd,s) < 0){
 				System.out.println(s + " : Sealed");
-				VaultCheck.triggerNotify(s);
+				VaultCheck.triggerNotify(s, " Vault Server Sealed");
 				Assert.assertFalse(true);
+			}else {
+				System.out.println(s + " : Unreachable");
+				VaultCheck.triggerNotify(s, " Vault Server Unreachable");
+				Assert.assertFalse((s + " : Unreachable"), true);;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
