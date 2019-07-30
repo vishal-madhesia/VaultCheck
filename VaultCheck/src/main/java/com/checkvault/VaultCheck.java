@@ -15,27 +15,29 @@ public class VaultCheck {
 
 	private static ArrayList<String> arrList = new ArrayList<String>();
 
-	public static void triggerNotify(String s) throws FileNotFoundException, IOException {
+	public static void triggerNotify(String s, String msg) throws FileNotFoundException, IOException {
 		Email.sendEMailThroughOUTLOOK(s);
 	}
 
-	public static boolean showResult(WebDriver wd, String s) {
+	public static int showResult(WebDriver wd, String s) throws InterruptedException {
 
-		wd.get("http://" + s + "/ui/vault/auth?with=token");
+		wd.get("http://" + s);
 
 		// Check if Status is Present on WebPage
 		try {
-			wd.findElement(By.xpath("//div[@class=\"status-menu-label\"]"));
-			if (wd.getCurrentUrl().contains("ui/vault/unseal")) {
-				return false;	
-			}
+			//wd.findElement(By.xpath("//div[@class=\"status-menu-label\"]"));
+			Thread.sleep(15000);
+			if (wd.getCurrentUrl().contains("/ui/vault/auth?with=token"))
+				return 1;
+			else if (wd.getCurrentUrl().contains("ui/vault/unseal")) {
+				return -1;	
+			}else
+				return 0;
+			
 		} catch (NoSuchElementException ne) {
-			return true;
-		} finally {
 			
 		}
-	
-		return true;
+		return 0;
 	}
 
 	public static ArrayList<String> serverListString2serverArrayList(String args[]) {
