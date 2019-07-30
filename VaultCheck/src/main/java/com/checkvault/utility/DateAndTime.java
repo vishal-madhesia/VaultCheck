@@ -16,8 +16,8 @@ public class DateAndTime {
 		
 		long duration  = EndDate.getTime() - StartDate.getTime();
 
-		Integer diffInSeconds = (int) TimeUnit.MILLISECONDS.toSeconds(duration);
-		Integer diffInMinutes = (int) TimeUnit.MILLISECONDS.toMinutes(duration);
+		Integer diffInSeconds = (int) TimeUnit.MILLISECONDS.toSeconds(duration)%60;
+		Integer diffInMinutes = (int) TimeUnit.MILLISECONDS.toMinutes(duration)%60;
 		Integer diffInHours   = (int) TimeUnit.MILLISECONDS.toHours(duration);
 		
 		return ((diffInHours)+":"+diffInMinutes+":"+(diffInSeconds));

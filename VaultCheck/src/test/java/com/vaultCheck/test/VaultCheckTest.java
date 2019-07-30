@@ -29,70 +29,75 @@ import com.checkvault.utility.FileUtility;
 public class VaultCheckTest {
 
 	private WebDriver wd;
-	private DateFormat dateFormat; 
-	
+	private DateFormat dateFormat;
+
 	@DataProvider(name = "data-provider")
-    public String[] dataProviderMethod()  {
+	public String[] dataProviderMethod() {
 		Properties prop = new Properties();
-		
+
 		try {
 			prop.load(new FileInputStream(FileUtility.getPath("VaultServerList.properties")));
-			String serverAddressasString[] = prop.getProperty("VaultServerList").split(","); 
+			String serverAddressasString[] = prop.getProperty("VaultServerList").split(",");
 			String serverAddress[] = new String[serverAddressasString.length];
 			System.out.println("Server List Check");
-			for(int i =0; i < serverAddressasString.length; i++) {
+			for (int i = 0; i < serverAddressasString.length; i++) {
 				serverAddress[i] = (new StringBuffer(serverAddressasString[i].trim())).toString();
 				System.out.println("     " + serverAddress[i]);
 			}
 			System.out.println("\n");
 			return serverAddress;
-		}catch(FileNotFoundException fnfe) {
+		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
-		}catch(IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
-		}finally {
-			
+		} finally {
+
 		}
 		return null;
-		
+
 	}
-	
+
 	@BeforeClass
 	public void initWebDriver() {
-		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
-		System.setProperty("webdriver.chrome.driver", 
-				((FileUtility.getPath("chromedriver.exe")).toString()));
+		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		System.setProperty("webdriver.chrome.driver", ((FileUtility.getPath("chromedriver.exe")).toString()));
 		wd = new ChromeDriver();
 		wd.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
-	
+
 	@Test(dataProvider = "data-provider")
 	public void checkIndividualVaults(String s) {
 		Date StartTime = new Date();
 		Date EndTime;
 		try {
-			if(VaultCheck.showResult(this.wd,s) > 0) {
-				System.out.print(s + " : Not Sealed");
+			if (VaultCheck.showResult(this.wd, s) > 0) {
+				System.out.println(s + " : Not Sealed");
 				EndTime = new Date();
-				System.out.println("\t\tExecution Time = " + dateFormat.format(StartTime) 
-													+ " - " + dateFormat.format(EndTime) 
-													+ " = " + DateAndTime.dateDiff(StartTime, EndTime));
+				System.out.println("\t\tExecution Time = " + dateFormat.format(StartTime) + " - "
+						+ dateFormat.format(EndTime) + " = " + DateAndTime.dateDiff(StartTime, EndTime));
 				Assert.assertTrue(true);
-			}else if(VaultCheck.showResult(this.wd,s) < 0){
+			} else if (VaultCheck.showResult(this.wd, s) < 0) {
 				System.out.println(s + " : Sealed");
 				VaultCheck.triggerNotify(s, " Vault Server Sealed");
+				EndTime = new Date();
+				System.out.println("\t\tExecution Time = " + dateFormat.format(StartTime) + " - "
+						+ dateFormat.format(EndTime) + " = " + DateAndTime.dateDiff(StartTime, EndTime));
 				Assert.assertFalse(true);
-			}else {
+			} else {
 				System.out.println(s + " : Unreachable");
 				VaultCheck.triggerNotify(s, " Vault Server Unreachable");
-				Assert.assertFalse((s + " : Unreachable"), true);;
+				EndTime = new Date();
+				System.out.println("\t\tExecution Time = " + dateFormat.format(StartTime) + " - "
+						+ dateFormat.format(EndTime) + " = " + DateAndTime.dateDiff(StartTime, EndTime));
+				Assert.assertFalse((s + " : Unreachable"), true);
+				;
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@AfterClass
 	public void closeWebDriver() {
 		this.wd.close();
