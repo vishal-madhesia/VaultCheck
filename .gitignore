@@ -26,3 +26,5 @@ VaultCheck/test-output/old/Default suite/classes.html
 VaultCheck/test-output/junitreports/TEST-com.vaultCheck.test.VaultCheckTest.xml
 VaultCheck/test-output/index.html
 VaultCheck/test-output/emailable-report.html
+*.html
+*.xml
