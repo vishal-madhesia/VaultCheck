@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package com.checkvault.utility;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @author vmadhe01
+ *
+ */
+public class DateAndTime {
+	
+	public static String dateDiff(Date StartDate, Date EndDate) {
+		
+		long duration  = EndDate.getTime() - StartDate.getTime();
+
+		Integer diffInSeconds = (int) TimeUnit.MILLISECONDS.toSeconds(duration);
+		Integer diffInMinutes = (int) TimeUnit.MILLISECONDS.toMinutes(duration);
+		Integer diffInHours   = (int) TimeUnit.MILLISECONDS.toHours(duration);
+		
+		return ((diffInHours)+":"+diffInMinutes+":"+(diffInSeconds));
+	}
+
+}

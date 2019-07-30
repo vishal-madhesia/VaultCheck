@@ -3,6 +3,9 @@ package com.vaultCheck.test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +21,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.checkvault.VaultCheck;
+import com.checkvault.utility.DateAndTime;
 import com.checkvault.utility.FileUtility;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +29,7 @@ import com.checkvault.utility.FileUtility;
 public class VaultCheckTest {
 
 	private WebDriver wd;
+	private DateFormat dateFormat; 
 	
 	@DataProvider(name = "data-provider")
     public String[] dataProviderMethod()  {
@@ -54,7 +59,7 @@ public class VaultCheckTest {
 	
 	@BeforeClass
 	public void initWebDriver() {
-		
+		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
 		System.setProperty("webdriver.chrome.driver", 
 				((FileUtility.getPath("chromedriver.exe")).toString()));
 		wd = new ChromeDriver();
@@ -63,9 +68,15 @@ public class VaultCheckTest {
 	
 	@Test(dataProvider = "data-provider")
 	public void checkIndividualVaults(String s) {
+		Date StartTime = new Date();
+		Date EndTime;
 		try {
 			if(VaultCheck.showResult(this.wd,s) > 0) {
-				System.out.println(s + " : Not Sealed");
+				System.out.print(s + " : Not Sealed");
+				EndTime = new Date();
+				System.out.println("\t\tExecution Time = " + dateFormat.format(StartTime) 
+													+ " - " + dateFormat.format(EndTime) 
+													+ " = " + DateAndTime.dateDiff(StartTime, EndTime));
 				Assert.assertTrue(true);
 			}else if(VaultCheck.showResult(this.wd,s) < 0){
 				System.out.println(s + " : Sealed");

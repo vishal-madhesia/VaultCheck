@@ -109,7 +109,6 @@ public class Email {
 			HtmlBody.append("HellBoy Active on Server @ " + serverAddress);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
 		} finally {
 
 		}

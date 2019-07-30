@@ -37,9 +37,9 @@ public class FileUtility {
 	
 	public static String getPath(String fileName) {
 		String projectRoot = System.getProperty("user.dir");
-		//System.out.println("Project Root   @ " + projectRoot);
+		/* System.out.println("Project Root   @ " + projectRoot); */
 		String projectParentDirectory = projectRoot.substring(0, projectRoot.lastIndexOf("\\"));
-		//System.out.println("Project Parent @ " + projectParentDirectory);
+		/* System.out.println("Project Parent @ " + projectParentDirectory); */
 		
 		String path;
 		
