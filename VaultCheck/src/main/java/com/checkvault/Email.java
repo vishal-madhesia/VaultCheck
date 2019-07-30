@@ -30,7 +30,7 @@ public class Email {
 	* 
 	 * 
 	 */
-	public static void sendEMailThroughOUTLOOK(String serverAddress) throws FileNotFoundException, IOException {
+	public static void sendEMailThroughOUTLOOK(String serverAddress, String AlertMsg) throws FileNotFoundException, IOException {
 		System.out.println("Inside sendemail");
 		try {
 
@@ -75,7 +75,7 @@ public class Email {
 			
 			msg.addRecipients(Message.RecipientType.CC, sendCCList.toArray(new Address[sendCCStringList.length]));
 			
-			String subject = "Alert Vault Server Sealed " + serverAddress;
+			String subject = "Alert "+  serverAddress + " " + AlertMsg;
 			
 			msg.setSubject(subject);
 			msg.setSentDate(new Date());
