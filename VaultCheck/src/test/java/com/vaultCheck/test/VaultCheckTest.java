@@ -33,10 +33,9 @@ public class VaultCheckTest {
 		try {
 			prop.load(new FileInputStream(FileUtility.getPath("VaultServerList.properties")));
 			String serverAddress[] = prop.getProperty("VaultServerList").split(",");
-			for(String s : serverAddress) {
+			for(String s : serverAddress)
 				s.trim();
 			return serverAddress;
-			}
 		}catch(FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
 		}catch(IOException ioe) {
