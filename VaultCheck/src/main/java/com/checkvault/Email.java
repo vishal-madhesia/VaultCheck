@@ -31,7 +31,7 @@ public class Email {
 	 * 
 	 */
 	public static void sendEMailThroughOUTLOOK(String serverAddress, String AlertMsg) throws FileNotFoundException, IOException {
-		System.out.println("Inside sendemail");
+		System.out.println("\tInside sendemail");
 		try {
 
 			Properties SmtpProps = new Properties();

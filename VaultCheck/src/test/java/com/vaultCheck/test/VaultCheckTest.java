@@ -32,9 +32,14 @@ public class VaultCheckTest {
 		
 		try {
 			prop.load(new FileInputStream(FileUtility.getPath("VaultServerList.properties")));
-			String serverAddress[] = prop.getProperty("VaultServerList").split(",");
-			for(String s : serverAddress)
-				s.trim();
+			String serverAddressasString[] = prop.getProperty("VaultServerList").split(","); 
+			String serverAddress[] = new String[serverAddressasString.length];
+			System.out.println("Server List Check");
+			for(int i =0; i < serverAddressasString.length; i++) {
+				serverAddress[i] = (new StringBuffer(serverAddressasString[i].trim())).toString();
+				System.out.println("     " + serverAddress[i]);
+			}
+			System.out.println("\n");
 			return serverAddress;
 		}catch(FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
