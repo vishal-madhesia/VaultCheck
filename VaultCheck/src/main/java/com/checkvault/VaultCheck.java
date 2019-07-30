@@ -16,7 +16,7 @@ public class VaultCheck {
 	private static ArrayList<String> arrList = new ArrayList<String>();
 
 	public static void triggerNotify(String s, String msg) throws FileNotFoundException, IOException {
-		Email.sendEMailThroughOUTLOOK(s);
+		Email.sendEMailThroughOUTLOOK(s,msg);
 	}
 
 	public static int showResult(WebDriver wd, String s) throws InterruptedException {
